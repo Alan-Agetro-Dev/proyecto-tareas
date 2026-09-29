@@ -1,0 +1,179 @@
+/* ===== Variables: colores y medidas en un solo lugar ===== */
+:root {
+  --fondo: #eef2f1;
+  --tarjeta: #ffffff;
+  --texto: #1c2b2a;
+  --texto-suave: #5b6c6a;
+  --acento: #0f766e;
+  --acento-oscuro: #0b5a54;
+  --borde: #d3dcda;
+  --peligro: #b42318;
+  --radio: 10px;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.app {
+  width: 100%;
+  max-width: 560px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+}
+
+h1 {
+  margin: 0 0 1.25rem;
+  font-size: 1.75rem;
+}
+
+/* Oculta algo visualmente pero lo deja disponible para lectores de pantalla */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== Formulario ===== */
+.form-tarea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-tarea input {
+  flex: 1;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.form-tarea button {
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--acento);
+  color: #fff;
+  font-weight: 600;
+}
+
+.form-tarea button:hover {
+  background: var(--acento-oscuro);
+}
+
+/* Foco visible para navegar con teclado */
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid #5eead4;
+  outline-offset: 2px;
+}
+
+/* ===== Filtros ===== */
+.filtros {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.filtro {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-suave);
+}
+
+.filtro.activo {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: #fff;
+}
+
+/* ===== Lista de tareas ===== */
+.lista-tareas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tarea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tarea-check {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--acento);
+}
+
+.tarea-titulo {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Tarea completada: texto tachado y atenuado */
+.tarea.completada .tarea-titulo {
+  text-decoration: line-through;
+  color: var(--texto-suave);
+}
+
+.btn-eliminar {
+  border: none;
+  background: transparent;
+  color: var(--peligro);
+  font-size: 0.9rem;
+}
+
+.btn-eliminar:hover {
+  text-decoration: underline;
+}
+
+/* ===== Mensajes ===== */
+.mensaje-vacio {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 1.5rem 0;
+}
+
+.contador {
+  margin: 1rem 0 0;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ===== Pantallas pequeñas ===== */
+@media (max-width: 480px) {
+  .form-tarea {
+    flex-direction: column;
+  }
+}

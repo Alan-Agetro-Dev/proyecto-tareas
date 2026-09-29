@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis tareas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <h1>Mis tareas</h1>
+
+    <!-- Formulario para agregar tareas. En la parte 2 lo conectaremos con JavaScript -->
+    <form id="form-tarea" class="form-tarea">
+      <label for="titulo" class="visually-hidden">Título de la tarea</label>
+      <input type="text" id="titulo" name="titulo" placeholder="¿Qué tienes que hacer?" required maxlength="100">
+      <button type="submit">Agregar tarea</button>
+    </form>
+
+    <!-- Filtros: se activarán con JavaScript -->
+    <nav class="filtros" aria-label="Filtrar tareas">
+      <button type="button" class="filtro activo" data-filtro="todas">Todas</button>
+      <button type="button" class="filtro" data-filtro="pendientes">Pendientes</button>
+      <button type="button" class="filtro" data-filtro="completadas">Completadas</button>
+    </nav>
+
+    <!-- Lista de tareas. Estos <li> son de ejemplo; luego JavaScript los generará desde la API -->
+    <ul id="lista-tareas" class="lista-tareas">
+      <li class="tarea">
+        <input type="checkbox" id="tarea-1" class="tarea-check">
+        <label for="tarea-1" class="tarea-titulo">Repasar async/await en JavaScript</label>
+        <button type="button" class="btn-eliminar" aria-label="Eliminar tarea">Eliminar</button>
+      </li>
+      <li class="tarea completada">
+        <input type="checkbox" id="tarea-2" class="tarea-check" checked>
+        <label for="tarea-2" class="tarea-titulo">Instalar Node.js y Visual Studio</label>
+        <button type="button" class="btn-eliminar" aria-label="Eliminar tarea">Eliminar</button>
+      </li>
+      <li class="tarea">
+        <input type="checkbox" id="tarea-3" class="tarea-check">
+        <label for="tarea-3" class="tarea-titulo">Crear la base de datos en SQL Server</label>
+        <button type="button" class="btn-eliminar" aria-label="Eliminar tarea">Eliminar</button>
+      </li>
+    </ul>
+
+    <!-- Mensaje para cuando no hay tareas (se mostrará/ocultará con JavaScript) -->
+    <p id="mensaje-vacio" class="mensaje-vacio" hidden>No hay tareas todavía. Escribe una arriba y pulsa "Agregar tarea".</p>
+
+    <p class="contador"><span id="contador-pendientes">2</span> tareas pendientes</p>
+  </main>
+</body>
+</html>

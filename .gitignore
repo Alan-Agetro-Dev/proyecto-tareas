@@ -1,0 +1,26 @@
+# ===== Node / JavaScript / React Native =====
+node_modules/
+npm-debug.log*
+yarn-error.log
+.expo/
+dist/
+build/
+web-build/
+
+# ===== .NET / C# / Visual Studio =====
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# ===== Secretos y configuración local (NUNCA subir contraseñas) =====
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+
+# ===== Sistema operativo y editor =====
+.DS_Store
+Thumbs.db
+.idea/
