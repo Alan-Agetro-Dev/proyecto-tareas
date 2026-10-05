@@ -69,6 +69,26 @@ h1 {
   font-size: 1rem;
 }
 
+/* ===== Formulario ===== */
+.form-tarea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-tarea input {
+  flex: 1;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* El campo de fecha mantiene su tamaño; el de texto se queda con el espacio sobrante */
+.form-tarea input[type="date"] {
+  flex: 0 0 auto;
+}
+
 button {
   font: inherit;
   cursor: pointer;
@@ -81,6 +101,7 @@ button {
   background: var(--acento);
   color: #fff;
   font-weight: 600;
+  white-space: nowrap; /* evita que el texto del botón se parta en dos líneas */
 }
 
 .form-tarea button:hover {
@@ -139,6 +160,18 @@ button:focus-visible {
 .tarea-titulo {
   flex: 1;
   cursor: pointer;
+}
+
+.tarea-titulo {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Fecha límite debajo del título de la tarea */
+.tarea-fecha {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
 }
 
 /* Tarea completada: texto tachado y atenuado */

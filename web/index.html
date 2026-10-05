@@ -14,6 +14,12 @@
     <form id="form-tarea" class="form-tarea">
       <label for="titulo" class="visually-hidden">Título de la tarea</label>
       <input type="text" id="titulo" name="titulo" placeholder="¿Qué tienes que hacer?" required maxlength="100">
+      
+       <!-- Fecha límite opcional: el navegador muestra un selector de calendario -->
+      <label for="fecha-limite" class="visually-hidden">Fecha límite</label>
+      <input type="date" id="fecha-limite" name="fechaLimite">
+      
+      
       <button type="submit">Agregar tarea</button>
     </form>
 
@@ -28,7 +34,10 @@
     <ul id="lista-tareas" class="lista-tareas">
       <li class="tarea">
         <input type="checkbox" id="tarea-1" class="tarea-check">
-        <label for="tarea-1" class="tarea-titulo">Repasar async/await en JavaScript</label>
+        <label for="tarea-1" class="tarea-titulo">
+          Repasar async/await en JavaScript
+          <small class="tarea-fecha">Vence: 10/10/2026</small>  <!-- Fecha límite de la tarea, en letra pequeña -->
+        </label>
         <button type="button" class="btn-eliminar" aria-label="Eliminar tarea">Eliminar</button>
       </li>
       <li class="tarea completada">
