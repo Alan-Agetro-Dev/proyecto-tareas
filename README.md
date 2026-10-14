@@ -1,5 +1,7 @@
 # Proyecto Tareas
 
+![Vista de la lista de tareas](docs/proyecto_tareas.png)
+
 Aplicación de lista de tareas fullstack, construida por partes como proyecto de práctica: web, app móvil, API y base de datos.
 
 ## Tecnologías
