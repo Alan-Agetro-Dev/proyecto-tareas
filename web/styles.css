@@ -151,6 +151,10 @@ button:focus-visible {
   border-bottom: 1px solid var(--borde);
 }
 
+.tarea:hover {
+  background: #eef2f9;
+}
+
 .tarea-check {
   width: 1.15rem;
   height: 1.15rem;
