@@ -18,6 +18,18 @@ function formatearFecha(fecha) {
   return `${dia}/${mes}/${anio}`;
 }
 
+// NUEVO: cambia una tarea de pendiente a completada (y al revés)
+function alternarCompletada(id) {
+  // find devuelve la primera tarea cuyo id coincide, o undefined si no existe
+  const tarea = tareas.find((t) => t.id === id);
+
+  if (tarea) {
+    tarea.completada = !tarea.completada; // ! invierte true/false
+  }
+
+  renderizar(); // vuelve a dibujar la lista con el estado actualizado
+}
+
 // ===== Crea el elemento <li> de una tarea =====
 function crearElementoTarea(tarea) {
   const li = document.createElement("li");
@@ -29,6 +41,9 @@ function crearElementoTarea(tarea) {
   check.id = `tarea-${tarea.id}`;
   check.className = "tarea-check";
   check.checked = tarea.completada;
+
+  // NUEVO: cuando el usuario marca o desmarca la casilla, actualizamos la tarea
+  check.addEventListener("change", () => alternarCompletada(tarea.id));
 
   // Texto de la tarea (enlazado a la casilla con htmlFor)
   const label = document.createElement("label");
@@ -57,7 +72,7 @@ function crearElementoTarea(tarea) {
 
 // ===== Dibuja en la página todo lo que hay en el arreglo =====
 function renderizar() {
-  listaTareas.innerHTML = ""; // vacía la lista (también quita las tareas de ejemplo)
+  listaTareas.innerHTML = ""; // vacía la lista
 
   tareas.forEach((tarea) => {
     listaTareas.append(crearElementoTarea(tarea));
@@ -83,7 +98,7 @@ formTarea.addEventListener("submit", (evento) => {
   });
   siguienteId++;
 
-  renderizar(); // actualiza la pantalla con el nuevo estado
+  renderizar();
 
   formTarea.reset();
   inputTitulo.focus();
