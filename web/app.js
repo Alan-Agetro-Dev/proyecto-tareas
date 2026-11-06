@@ -30,6 +30,18 @@ function alternarCompletada(id) {
   renderizar(); // vuelve a dibujar la lista con el estado actualizado
 }
 
+// NUEVO: elimina una tarea del arreglo según su id
+function eliminarTarea(id) {
+  // findIndex devuelve la posición de la tarea en el arreglo, o -1 si no existe
+  const indice = tareas.findIndex((t) => t.id === id);
+
+  if (indice !== -1) {
+    tareas.splice(indice, 1); // splice quita 1 elemento a partir de esa posición
+  }
+
+  renderizar(); // vuelve a dibujar la lista sin la tarea eliminada
+}
+
 // ===== Crea el elemento <li> de una tarea =====
 function crearElementoTarea(tarea) {
   const li = document.createElement("li");
