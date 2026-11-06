@@ -71,12 +71,15 @@ function crearElementoTarea(tarea) {
     label.append(fecha);
   }
 
-  // Botón de eliminar (se activará en el Día 12)
+  // Botón de eliminar
   const btnEliminar = document.createElement("button");
   btnEliminar.type = "button";
   btnEliminar.className = "btn-eliminar";
   btnEliminar.setAttribute("aria-label", "Eliminar tarea");
   btnEliminar.textContent = "Eliminar";
+
+  // NUEVO: al hacer clic, elimina esta tarea
+  btnEliminar.addEventListener("click", () => eliminarTarea(tarea.id));
 
   li.append(check, label, btnEliminar);
   return li;
