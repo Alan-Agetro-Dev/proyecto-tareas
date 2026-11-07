@@ -8,6 +8,7 @@ const inputTitulo = document.getElementById("titulo");
 const inputFecha = document.getElementById("fecha-limite");
 const listaTareas = document.getElementById("lista-tareas");
 const contadorPendientes = document.getElementById("contador-pendientes");
+const mensajeVacio = document.getElementById("mensaje-vacio");
 
 // ===== Estado: aquí viven las tareas mientras la página está abierta =====
 const tareas = [];
@@ -97,6 +98,9 @@ function renderizar() {
    // NUEVO: cuenta las tareas que todavía no están completadas
   const pendientes = tareas.filter((t) => !t.completada).length;
   contadorPendientes.textContent = pendientes;
+
+    // NUEVO: muestra el mensaje solo cuando no hay ninguna tarea
+  mensajeVacio.hidden = tareas.length > 0;
 }
 
 // ===== Envío del formulario =====
