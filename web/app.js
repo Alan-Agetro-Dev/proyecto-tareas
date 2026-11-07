@@ -9,10 +9,12 @@ const inputFecha = document.getElementById("fecha-limite");
 const listaTareas = document.getElementById("lista-tareas");
 const contadorPendientes = document.getElementById("contador-pendientes");
 const mensajeVacio = document.getElementById("mensaje-vacio");
+const botonesFiltro = document.querySelectorAll(".filtro");
 
 // ===== Estado: aquí viven las tareas mientras la página está abierta =====
 const tareas = [];
 let siguienteId = 1;
+let filtroActual = "todas"; // NUEVO: "todas", "pendientes" o "completadas"
 
 // ===== Convierte "2026-10-30" en "30/10/2026" =====
 function formatearFecha(fecha) {
@@ -87,11 +89,22 @@ function crearElementoTarea(tarea) {
   return li;
 }
 
+// NUEVO: devuelve solo las tareas que corresponden al filtro elegido
+function obtenerTareasVisibles() {
+  if (filtroActual === "pendientes") {
+    return tareas.filter((t) => !t.completada);
+  }
+  if (filtroActual === "completadas") {
+    return tareas.filter((t) => t.completada);
+  }
+  return tareas;
+}
+
 // ===== Dibuja en la página todo lo que hay en el arreglo =====
 function renderizar() {
   listaTareas.innerHTML = ""; // vacía la lista
 
-  tareas.forEach((tarea) => {
+   obtenerTareasVisibles().forEach((tarea) => {
     listaTareas.append(crearElementoTarea(tarea));
   });
 
@@ -121,6 +134,18 @@ formTarea.addEventListener("submit", (evento) => {
     completada: false,
   });
   siguienteId++;
+
+  // NUEVO: clic en un filtro
+botonesFiltro.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    filtroActual = boton.dataset.filtro; // lee el data-filtro del HTML
+
+    // Deja la clase "activo" solo en el botón pulsado
+    botonesFiltro.forEach((b) => b.classList.toggle("activo", b === boton));
+
+    renderizar();
+  });
+});
 
   renderizar();
 
