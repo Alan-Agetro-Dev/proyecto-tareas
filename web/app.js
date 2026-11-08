@@ -135,7 +135,13 @@ formTarea.addEventListener("submit", (evento) => {
   });
   siguienteId++;
 
-  // NUEVO: clic en un filtro
+  renderizar();
+
+  formTarea.reset();
+  inputTitulo.focus();
+});
+
+ // ===== Clic en un filtro (fuera del formulario, se registra una sola vez)=====
 botonesFiltro.forEach((boton) => {
   boton.addEventListener("click", () => {
     filtroActual = boton.dataset.filtro; // lee el data-filtro del HTML
@@ -147,11 +153,34 @@ botonesFiltro.forEach((boton) => {
   });
 });
 
-  renderizar();
 
-  formTarea.reset();
-  inputTitulo.focus();
-});
+// Convierte una tarea de la API de prueba ({ userId, id, title, completed })
+// al formato que usa nuestra aplicación
+function convertirTareaRemota(remota) {
+  return {
+    id: remota.id,
+    titulo: remota.title,
+    fechaLimite: "", // la API de prueba no trae fecha
+    completada: remota.completed,
+  };
+}
+
+// Pide las tareas a la API y las agrega al estado
+async function cargarTareasIniciales() {
+  try {
+    const remotas = await obtenerTareasRemotas();
+    remotas.forEach((remota) => tareas.push(convertirTareaRemota(remota)));
+
+    // El próximo id debe ser mayor que cualquier id que ya exista
+    siguienteId = Math.max(0, ...tareas.map((t) => t.id)) + 1;
+  } catch (error) {
+    // Si algo falla, lo vemos en la consola y la app sigue funcionando
+    console.error("No se pudieron cargar las tareas:", error);
+  }
+
+  renderizar();
+}
 
 // Dibujo inicial al cargar la página
 renderizar();
+cargarTareasIniciales();
