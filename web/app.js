@@ -8,6 +8,7 @@ const inputTitulo = document.getElementById("titulo");
 const inputFecha = document.getElementById("fecha-limite");
 const listaTareas = document.getElementById("lista-tareas");
 const contadorPendientes = document.getElementById("contador-pendientes");
+const mensajeEstado = document.getElementById("mensaje-estado");
 const mensajeVacio = document.getElementById("mensaje-vacio");
 const botonesFiltro = document.querySelectorAll(".filtro");
 
@@ -165,20 +166,34 @@ function convertirTareaRemota(remota) {
   };
 }
 
+// Muestra un mensaje de estado; con texto vacío lo oculta
+function mostrarEstado(texto, esError = false) {
+  mensajeEstado.textContent = texto;
+  mensajeEstado.classList.toggle("error", esError);
+  mensajeEstado.hidden = texto === "";
+}
+
 // Pide las tareas a la API y las agrega al estado
 async function cargarTareasIniciales() {
+  // Mientras carga: lista vacía, sin mensaje de "no hay tareas" y aviso de carga
+  listaTareas.innerHTML = "";
+  mensajeVacio.hidden = true;
+  mostrarEstado("Cargando tareas...");
+
   try {
     const remotas = await obtenerTareasRemotas();
     remotas.forEach((remota) => tareas.push(convertirTareaRemota(remota)));
 
     // El próximo id debe ser mayor que cualquier id que ya exista
     siguienteId = Math.max(0, ...tareas.map((t) => t.id)) + 1;
-  } catch (error) {
-    // Si algo falla, lo vemos en la consola y la app sigue funcionando
-    console.error("No se pudieron cargar las tareas:", error);
-  }
 
-  renderizar();
+    mostrarEstado(""); // todo salió bien: oculta el mensaje
+  } catch (error) {
+    console.error("No se pudieron cargar las tareas:", error);
+    mostrarEstado("No se pudieron cargar las tareas. Revisa tu conexión.", true);
+  } finally {
+    renderizar(); // se ejecuta siempre, haya salido bien o mal
+  }
 }
 
 // Dibujo inicial al cargar la página

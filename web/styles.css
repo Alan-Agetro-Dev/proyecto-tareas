@@ -196,6 +196,17 @@ button:focus-visible {
 }
 
 /* ===== Mensajes ===== */
+
+.mensaje-estado {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 1rem 0;
+}
+
+.mensaje-estado.error {
+  color: var(--peligro);
+}
+
 .mensaje-vacio {
   text-align: center;
   color: var(--texto-suave);
