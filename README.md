@@ -36,4 +36,14 @@ proyecto-tareas/
 2. Abre la carpeta `web/`.
 3. Abre `index.html` en el navegador (o usa la extensión Live Server de VS Code).
 
+## Cómo ejecutar la API
+
+Requiere el SDK de .NET (probado con .NET 10).
+
+1. Abre una terminal en `api/TareasApi`.
+2. Ejecuta `dotnet run`.
+3. Abre en el navegador la dirección que muestra la terminal (`Now listening on: ...`) seguida de `/api/tareas`.
+
+Endpoints disponibles por ahora (los datos viven en memoria): `GET /api/tareas`, `GET /api/tareas/{id}`, `POST /api/tareas`, `PUT /api/tareas/{id}` y `DELETE /api/tareas/{id}`.
+
 > Las instrucciones de las demás partes se irán agregando a medida que avance el proyecto.
