@@ -1,12 +1,12 @@
-// api.js: funciones que hablan con una API por HTTP.
-// Por ahora use una API pública de prueba; luego la cambiare por una creada en C#.
+// api.js: funciones que hablan con la API por HTTP.
+// Ahora usamos nuestra propia API en C# (ASP.NET Core).
 
-const URL_API_PRUEBA = "https://jsonplaceholder.typicode.com/todos";
+const URL_API = "http://localhost:5126/api/tareas";
 
 // async: la función trabaja con promesas y siempre devuelve una promesa
-async function obtenerTareasRemotas(limite = 5) {
+async function obtenerTareasRemotas() {
   // await espera la respuesta del servidor sin congelar la página
-  const respuesta = await fetch(`${URL_API_PRUEBA}?_limit=${limite}`);
+  const respuesta = await fetch(URL_API);
 
   // fetch solo falla por problemas de red; un 404 o un 500 NO lanzan error solos
   if (!respuesta.ok) {
@@ -14,6 +14,5 @@ async function obtenerTareasRemotas(limite = 5) {
   }
 
   // .json() convierte el texto JSON de la respuesta en objetos de JavaScript
-  const datos = await respuesta.json();
-  return datos;
+  return await respuesta.json();
 }

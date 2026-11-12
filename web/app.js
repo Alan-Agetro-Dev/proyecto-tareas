@@ -155,14 +155,15 @@ botonesFiltro.forEach((boton) => {
 });
 
 
-// Convierte una tarea de la API de prueba ({ userId, id, title, completed })
+// Adapta una tarea de la API ({ id, titulo, fechaLimite, completada })
 // al formato que usa nuestra aplicación
 function convertirTareaRemota(remota) {
   return {
     id: remota.id,
-    titulo: remota.title,
-    fechaLimite: "", // la API de prueba no trae fecha
-    completada: remota.completed,
+    titulo: remota.titulo,
+    // La API manda null cuando no hay fecha; en la web usamos "" para "sin fecha"
+    fechaLimite: remota.fechaLimite ?? "",
+    completada: remota.completada,
   };
 }
 
