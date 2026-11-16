@@ -145,7 +145,28 @@ formTarea.addEventListener("submit", async (evento) => {
     console.error("No se pudo crear la tarea:", error);
     mostrarEstado("No se pudo guardar la tarea. Intenta de nuevo.", true);
   }
+  
 });
+
+// Actualiza una tarea en la API (PUT). La API responde 204 sin cuerpo, así que no devuelve nada
+async function actualizarTareaRemota(tarea) {
+  // El id va en la dirección: /api/tareas/2
+  const respuesta = await fetch(`${URL_API}/${tarea.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      titulo: tarea.titulo,
+      // La API espera null cuando no hay fecha; en la web usamos "" para "sin fecha"
+      fechaLimite: tarea.fechaLimite === "" ? null : tarea.fechaLimite,
+      completada: tarea.completada,
+    }),
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`Error HTTP ${respuesta.status}`);
+  }
+}
+
 
  // ===== Clic en un filtro (fuera del formulario, se registra una sola vez)=====
 botonesFiltro.forEach((boton) => {
