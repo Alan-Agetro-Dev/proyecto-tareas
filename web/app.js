@@ -118,7 +118,8 @@ function renderizar() {
 }
 
 // ===== Envío del formulario =====
-formTarea.addEventListener("submit", (evento) => {
+// ===== Envío del formulario =====
+formTarea.addEventListener("submit", async (evento) => {
   evento.preventDefault();
 
   const titulo = inputTitulo.value.trim();
@@ -128,18 +129,22 @@ formTarea.addEventListener("submit", (evento) => {
     return;
   }
 
-  tareas.push({
-    id: siguienteId,
-    titulo: titulo,
-    fechaLimite: fechaLimite,
-    completada: false,
-  });
-  siguienteId++;
+  try {
+    // Guarda la tarea en la API; devuelve la tarea creada, ya con su id real
+    const creada = await crearTareaRemota({ titulo, fechaLimite, completada: false });
 
-  renderizar();
+    // La agregamos al estado en el formato de la web y dibujamos la lista
+    tareas.push(convertirTareaRemota(creada));
+    mostrarEstado(""); // limpia un posible mensaje de error anterior
+    renderizar();
 
-  formTarea.reset();
-  inputTitulo.focus();
+    // Solo si salió bien, limpiamos el formulario
+    formTarea.reset();
+    inputTitulo.focus();
+  } catch (error) {
+    console.error("No se pudo crear la tarea:", error);
+    mostrarEstado("No se pudo guardar la tarea. Intenta de nuevo.", true);
+  }
 });
 
  // ===== Clic en un filtro (fuera del formulario, se registra una sola vez)=====
