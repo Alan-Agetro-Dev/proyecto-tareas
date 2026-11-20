@@ -23,28 +23,29 @@ function formatearFecha(fecha) {
   return `${dia}/${mes}/${anio}`;
 }
 
-// NUEVO: cambia una tarea de pendiente a completada (y al revés)
-function alternarCompletada(id) {
+// Cambia una tarea entre pendiente y completada, y guarda el cambio en la API
+async function alternarCompletada(id) {
   // find devuelve la primera tarea cuyo id coincide, o undefined si no existe
   const tarea = tareas.find((t) => t.id === id);
 
-  if (tarea) {
-    tarea.completada = !tarea.completada; // ! invierte true/false
+  if (!tarea) {
+    return;
   }
 
-  renderizar(); // vuelve a dibujar la lista con el estado actualizado
-}
+  try {
+    // Mandamos a la API una copia de la tarea con el estado contrario al actual
+    await actualizarTareaRemota({ ...tarea, completada: !tarea.completada });
 
-// NUEVO: elimina una tarea del arreglo según su id
-function eliminarTarea(id) {
-  // findIndex devuelve la posición de la tarea en el arreglo, o -1 si no existe
-  const indice = tareas.findIndex((t) => t.id === id);
-
-  if (indice !== -1) {
-    tareas.splice(indice, 1); // splice quita 1 elemento a partir de esa posición
+    // Solo si la API aceptó el cambio, lo reflejamos en el estado de la web
+    tarea.completada = !tarea.completada;
+    mostrarEstado(""); // limpia un posible mensaje de error anterior
+  } catch (error) {
+    console.error("No se pudo actualizar la tarea:", error);
+    mostrarEstado("No se pudo guardar el cambio. Intenta de nuevo.", true);
   }
 
-  renderizar(); // vuelve a dibujar la lista sin la tarea eliminada
+  // Se dibuja siempre: si falló, la casilla vuelve a mostrar su estado real
+  renderizar();
 }
 
 // ===== Crea el elemento <li> de una tarea =====
