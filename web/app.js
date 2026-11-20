@@ -168,6 +168,17 @@ async function actualizarTareaRemota(tarea) {
   }
 }
 
+// Elimina una tarea en la API (DELETE). La API responde 204 sin cuerpo, así que no devuelve nada
+async function eliminarTareaRemota(id) {
+  // El id va en la dirección: /api/tareas/2
+  const respuesta = await fetch(`${URL_API}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`Error HTTP ${respuesta.status}`);
+  }
+}
 
  // ===== Clic en un filtro (fuera del formulario, se registra una sola vez)=====
 botonesFiltro.forEach((boton) => {
