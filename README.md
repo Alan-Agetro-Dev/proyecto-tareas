@@ -23,12 +23,15 @@ proyecto-tareas/
 ```
 ## Estado del proyecto
 
+## Estado del proyecto
+
 - [x] Parte 1: estructura HTML y estilos CSS
-- [x] Parte 2: JavaScript (agregar, marcar, editar, eliminar, filtrar y ordenar tareas) y primera petición con `fetch` a una API de prueba
-- [ ] Parte 3: API en C# con ASP.NET Core, SQL Server y EF Core
-- [ ] Parte 4: integración de la web con la API
-- [ ] Parte 5: DTOs, validaciones, servicios, repositorios, pruebas y seguridad
-- [ ] Parte 6: app móvil con React Native
+- [x] Parte 2: JavaScript (agregar, marcar, editar, eliminar, filtrar y ordenar tareas) y peticiones con `fetch`
+- [x] Parte 3: API en C# con ASP.NET Core (CRUD en memoria) y CORS
+- [ ] Parte 4: integración de la web con la API (ya lee y crea tareas; faltan marcar, editar y eliminar)
+- [ ] Parte 5: base de datos en SQL Server y persistencia con EF Core
+- [ ] Parte 6: DTOs, validaciones, servicios, repositorios, pruebas y seguridad
+- [ ] Parte 7: app móvil con React Native
 
 ## Cómo ejecutar la parte web
 
